@@ -5,6 +5,9 @@ namespace App\Repositories;
 use App\Entities\Media;
 use App\Interfaces\MediaRepositoryInterface;
 
+/**
+ * Deprecated
+ */
 class InMemoryMediaRepository implements MediaRepositoryInterface
 {
     private array $storage = [];
