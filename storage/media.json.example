@@ -1,0 +1,42 @@
+{
+    "608a622c-36bc-4215-9e81-82b7ae860072": {
+        "uuid": "608a622c-36bc-4215-9e81-82b7ae860072",
+        "type": "image",
+        "title": "Logo",
+        "description": "Example logo",
+        "sourceUrl": "http:\/\/example.com\/logo.png",
+        "uploadedAt": "2025-09-21T23:58:12+00:00",
+        "metadata": {
+            "width": "1920",
+            "height": "1080",
+            "format": "png"
+        }
+    },
+    "a4d439a3-1666-4cca-aa35-94ca5b7306ad": {
+        "uuid": "a4d439a3-1666-4cca-aa35-94ca5b7306ad",
+        "type": "image",
+        "title": "Logo",
+        "description": "Company logo",
+        "sourceUrl": "http:\/\/example.com\/logo.png",
+        "uploadedAt": "2025-09-22T00:17:27+00:00",
+        "metadata": []
+    },
+    "569c2fbd-b0e4-49d8-b46d-9933e36c6350": {
+        "uuid": "569c2fbd-b0e4-49d8-b46d-9933e36c6350",
+        "type": "video",
+        "title": "Trailer",
+        "description": "Product trailer video",
+        "sourceUrl": "http:\/\/example.com\/trailer.mp4",
+        "uploadedAt": "2025-09-22T00:17:27+00:00",
+        "metadata": []
+    },
+    "d2ec6df3-7cdc-4612-bf87-f5e3ef0e9cb0": {
+        "uuid": "d2ec6df3-7cdc-4612-bf87-f5e3ef0e9cb0",
+        "type": "audio",
+        "title": "Podcast",
+        "description": "Tech podcast",
+        "sourceUrl": "http:\/\/example.com\/podcast.mp3",
+        "uploadedAt": "2025-09-22T00:17:27+00:00",
+        "metadata": []
+    }
+}
