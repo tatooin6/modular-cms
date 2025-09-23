@@ -1,11 +1,11 @@
-# Modular CMS (PHP Backend Challenge)
+# Modular CMS
 
 This project is a modular PHP backend component built with **Laravel 10**.  
 It simulates a **Media Management Module** for a future CMS, with support for media storage, metadata enrichment, and search capabilities.  
 
 ---
 
-## 🚀 Requirements
+## Requirements
 
 - PHP 8.2+  
 - Composer  
@@ -40,9 +40,9 @@ php artisan key:generate
 
 ---
 
-## ▶️ Running the Application
+## Running the Application
 
-We are not using HTTP routes or controllers.
+This project is not using HTTP routes or controllers.
 Instead, all interaction is done via **Artisan commands** in the CLI.
 
 Laravel’s built-in commands work as usual, e.g.:
@@ -54,7 +54,7 @@ php artisan list
 
 ---
 
-## 📦 Media Module Commands
+## Media Module Commands
 
 ### 1. Upload a new media
 
@@ -76,6 +76,7 @@ Date: 2025-09-21 23:15:42
 
 The media entry is stored in `storage/media.json`.
 
+Sample media can come from `storage/media.json.example`.
 ---
 
 ### 2. Enrich media metadata
@@ -124,7 +125,7 @@ Metadata: {"width":"1920","height":"1080","format":"png"}
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 app/
@@ -137,11 +138,31 @@ app/
 
 ---
 
-## 🧪 Tests (coming soon)
+## Tests
 
-Unit tests will be located in `tests/Unit`.
-They will cover:
+Unit tests are located in `tests/Unit` and executed with [Pest](https://pestphp.com/).
+
+### Run all tests
+
+```bash
+./vendor/bin/pest
+```
+
+### Run specific test file
+
+```bash
+./vendor/bin/pest --filter=MediaService
+```
+
+### Alternative (using composer script)
+
+```bash
+composer test
+```
+
+The tests cover:
 
 * Media creation and validation
 * Metadata enrichment
 * Media resolution for articles
+
