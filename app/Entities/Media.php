@@ -31,4 +31,17 @@ class Media
         $this->uploadedAt = $uploadedAt;
         $this->metadata = $metadata;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'uuid' => $this->uuid,
+            'type' => $this->type,
+            'title' => $this->title,
+            'description' => $this->description,
+            'sourceUrl' => $this->sourceUrl,
+            'uploadedAt' => $this->uploadedAt->format(DATE_ATOM),
+            'metadata' => $this->metadata,
+        ];
+    }
 }

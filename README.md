@@ -1,7 +1,7 @@
 # Modular CMS
 
 This project is a modular PHP backend component built with **Laravel 10**.  
-It simulates a **Media Management Module** for a future CMS, with support for media storage, metadata enrichment, and search capabilities.  
+It simulates a **Media Management Module** for a future CMS, with support for media storage, metadata enrichment, search capabilities and formatted article export.  
 
 ---
 
@@ -17,7 +17,7 @@ Recommended extras:
 
 ---
 
-## 🔧 Installation
+## Installation
 
 Clone the repository:
 
@@ -75,8 +75,8 @@ Date: 2025-09-21 23:15:42
 ```
 
 The media entry is stored in `storage/media.json`.
+Sample media can be found in `storage/media.json.example`.
 
-Sample media can come from `storage/media.json.example`.
 ---
 
 ### 2. Enrich media metadata
@@ -125,15 +125,68 @@ Metadata: {"width":"1920","height":"1080","format":"png"}
 
 ---
 
+## Article Module Commands
+
+### 1. Export article with flags (simple use cases)
+
+```bash
+php artisan article:export "My First Article" "This is the content" --images=<uuid1> --media=<uuid2>
+```
+
+Output (grouped by type):
+
+```json
+{
+  "articleUuid": "abcd-1234",
+  "headline": "My First Article",
+  "content": "This is the content",
+  "media": {
+    "image": [
+      { "uuid": "uuid1", "type": "image", "title": "Logo", ... }
+    ],
+    "video": [
+      { "uuid": "uuid2", "type": "video", "title": "Trailer", ... }
+    ]
+  }
+}
+```
+
+---
+
+### 2. Export article from JSON file (scalable use cases)
+
+Prepare a file `storage/article.json`:
+
+```json
+{
+  "headline": "My First Article",
+  "content": "This is the content",
+  "images": ["uuid1", "uuid2"],
+  "media": ["uuid3"]
+}
+```
+
+Run:
+
+```bash
+php artisan article:export-file storage/article.json
+```
+
+This allows handling hundreds of media entries easily.
+Sample article file: `storage/article.json.example`.
+
+---
+
 ## Project Structure
 
 ```
 app/
  ┣ Console/Commands/   # Artisan commands
  ┣ Entities/           # Plain entities (POPOs)
- ┣ Interfaces/         # Interfaces for repositories
+ ┣ Interfaces/         # Interfaces for repositories and validation strategies
  ┣ Repositories/       # FileMediaRepository, InMemoryMediaRepository
- ┗ Services/           # MediaService, MediaMetadataService
+ ┣ Services/           # MediaService, MediaMetadataService, MediaResolverService
+ ┗ Strategies/         # Validation strategies (Default, Relaxed)
 ```
 
 ---
@@ -162,7 +215,7 @@ composer test
 
 The tests cover:
 
-* Media creation and validation
+* Media creation and validation (with strategy pattern)
 * Metadata enrichment
 * Media resolution for articles
-
+* Article export serialization

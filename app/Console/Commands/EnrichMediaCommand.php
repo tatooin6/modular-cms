@@ -32,7 +32,6 @@ class EnrichMediaCommand extends Command
     public function handle()
     {
         $repo = new FileMediaRepository();
-        $mediaService = new MediaService($repo);
         $metadataService = new MediaMetadataService($repo);
 
         $uuid = $this->argument('uuid');

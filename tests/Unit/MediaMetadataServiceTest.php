@@ -6,7 +6,8 @@ use App\Services\MediaMetadataService;
 
 test('metadata can be enriched for existing media', function () {
     $repo = new InMemoryMediaRepository();
-    $mediaService = new MediaService($repo);
+    $strategy = new \App\Strategies\DefaultValidationStrategy();
+    $mediaService = new MediaService($repo, $strategy);
     $metadataService = new MediaMetadataService($repo);
 
     $media = $mediaService->createMedia(
@@ -28,7 +29,8 @@ test('metadata can be enriched for existing media', function () {
 
 test('metadata enrichment merges with existing metadata', function () {
     $repo = new InMemoryMediaRepository();
-    $mediaService = new MediaService($repo);
+    $strategy = new \App\Strategies\DefaultValidationStrategy();
+    $mediaService = new MediaService($repo, $strategy);
     $metadataService = new MediaMetadataService($repo);
 
     $media = $mediaService->createMedia(

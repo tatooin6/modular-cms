@@ -8,7 +8,8 @@ use Ramsey\Uuid\Uuid;
 
 test('resolver returns media for article uuids', function () {
     $repo = new InMemoryMediaRepository();
-    $mediaService = new MediaService($repo);
+    $strategy = new \App\Strategies\DefaultValidationStrategy();
+    $mediaService = new MediaService($repo, $strategy);
     $resolver = new MediaResolverService($repo);
 
     $image = $mediaService->createMedia(
@@ -42,7 +43,8 @@ test('resolver returns media for article uuids', function () {
 
 test('resolver skips non-existing media uuids', function () {
     $repo = new InMemoryMediaRepository();
-    $mediaService = new MediaService($repo);
+    $strategy = new \App\Strategies\DefaultValidationStrategy();
+    $mediaService = new MediaService($repo, $strategy);
     $resolver = new MediaResolverService($repo);
 
     $image = $mediaService->createMedia(
