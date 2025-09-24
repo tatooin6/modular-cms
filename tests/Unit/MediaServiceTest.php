@@ -5,7 +5,8 @@ use App\Services\MediaService;
 
 test('media can be created (without persistency)', function () {
     $repo = new InMemoryMediaRepository();
-    $service = new MediaService($repo);
+    $strategy = new \App\Strategies\DefaultValidationStrategy();
+    $service = new MediaService($repo, $strategy);
 
     $media = $service->createMedia(
         "image",
@@ -22,7 +23,8 @@ test('media can be created (without persistency)', function () {
 
 test('invalid media type throws exception', function () {
     $repo = new InMemoryMediaRepository();
-    $service = new MediaService($repo);
+    $strategy = new \App\Strategies\DefaultValidationStrategy();
+    $service = new MediaService($repo, $strategy);
 
     $service->createMedia(
         "invalid-type",
@@ -34,7 +36,8 @@ test('invalid media type throws exception', function () {
 
 test('media can be searched by type', function () {
     $repo = new InMemoryMediaRepository();
-    $service = new MediaService($repo);
+    $strategy = new \App\Strategies\DefaultValidationStrategy();
+    $service = new MediaService($repo, $strategy);
 
     $service->createMedia("image", "Logo", "Logo test", "http://example.com/logo.png");
     $service->createMedia("video", "Trailer", "Video test", "http://example.com/trailer.mp4");
@@ -47,7 +50,8 @@ test('media can be searched by type', function () {
 
 test('media can be searched by title', function () {
     $repo = new InMemoryMediaRepository();
-    $service = new MediaService($repo);
+    $strategy = new \App\Strategies\DefaultValidationStrategy();
+    $service = new MediaService($repo, $strategy);
 
     $service->createMedia("image", "Company Logo", "Description", "http://example.com/logo.png");
     $service->createMedia("video", "Product Trailer", "Description", "http://example.com/trailer.mp4");
