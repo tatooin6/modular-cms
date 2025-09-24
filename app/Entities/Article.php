@@ -23,4 +23,21 @@ class Article
         $this->imageUuids = $imageUuids;
         $this->mediaAttachments = $mediaAttachments;
     }
+
+    public function toArray(array $resolvedMedia = []): array
+    {
+        $grouped = [];
+
+        foreach ($resolvedMedia as $media) {
+            $grouped[$media->type][] = $media->toArray();
+        }
+
+        return [
+            'articleUuid' => $this->articleUuid,
+            'headline' => $this->headline,
+            'content' => $this->content,
+            'media' => $grouped,
+        ];
+    }
+
 }

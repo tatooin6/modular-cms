@@ -30,7 +30,8 @@ class SearchMediaCommand extends Command
     public function handle()
     {
         $repo = new FileMediaRepository();
-        $service = new MediaService($repo);
+        $strategy = new \App\Strategies\DefaultValidationStrategy();
+        $service = new MediaService($repo, $strategy);
 
         $type = $this->option('type');
         $title = $this->option('title');

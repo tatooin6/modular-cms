@@ -32,7 +32,8 @@ class UploadMediaCommand extends Command
     public function handle()
     {
         $repo = new FileMediaRepository();
-        $service = new MediaService($repo);
+        $strategy = new \App\Strategies\DefaultValidationStrategy();
+        $service = new MediaService($repo, $strategy);
 
         $media = $service->createMedia(
             $this->argument('type'),

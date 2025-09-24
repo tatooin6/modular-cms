@@ -4,17 +4,21 @@ namespace App\Services;
 
 use App\Entities\Media;
 use App\Interfaces\MediaRepositoryInterface;
-use DateTimeImmutable;
+use App\Interfaces\MediaValidationStrategy;
 use Ramsey\Uuid\Uuid;
+use DateTimeImmutable;
 
 class MediaService
 {
     private MediaRepositoryInterface $repository;
-    private array $allowedTypes = ['image', 'video', 'audio', 'graph', 'file']; // TODO: check if this can be enums
+    private MediaValidationStrategy $validationStrategy;
 
-    public function __construct(MediaRepositoryInterface $repository)
-    {
+    public function __construct(
+        MediaRepositoryInterface $repository,
+        MediaValidationStrategy $validationStrategy
+    ) {
         $this->repository = $repository;
+        $this->validationStrategy = $validationStrategy;
     }
 
     public function createMedia(
@@ -24,7 +28,7 @@ class MediaService
         string $sourceUrl,
         array $metadata = []
     ): Media {
-        if (!in_array($type, $this->allowedTypes, true)) {
+        if (!$this->validationStrategy->isValid($type)) {
             throw new \InvalidArgumentException("Invalid media type: $type");
         }
 
